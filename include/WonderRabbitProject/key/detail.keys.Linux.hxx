@@ -1,7 +1,7 @@
 #pragma once
 
 keys_element_t keys[] =
-{ std::make_tuple("none", 0)
+{ std::make_tuple("none", -1)
 , std::make_tuple("escape", KEY_ESC)
 , std::make_tuple("f1", KEY_F1)
 , std::make_tuple("f2", KEY_F2)
@@ -150,5 +150,5 @@ keys_element_t keys[] =
 , std::make_tuple("brightness down", KEY_BRIGHTNESSDOWN)
 , std::make_tuple("brightness up", KEY_BRIGHTNESSUP)
 , std::make_tuple("display off", KEY_DISPLAY_OFF)
-, std::make_tuple("function", -1)
+, std::make_tuple("function", -2)
 };
