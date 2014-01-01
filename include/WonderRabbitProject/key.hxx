@@ -38,7 +38,7 @@ namespace WonderRabbitProject
         std::vector<std::string> vector;
         std::transform
         ( range.first, range.second, std::back_inserter(vector)
-        , [](const decltype(*range.first)& p){ return p.second; }
+        , [](decltype(*range.first)& p){ return p.second; }
         );
         std::sort(std::begin(vector), std::end(vector));
         return std::move(vector);
