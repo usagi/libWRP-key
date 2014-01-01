@@ -26,7 +26,7 @@ to the other:
 
 ## Example
 
-- [key](example/key.cxx)
+[example/key.cxx](example/key.cxx)
 
     cd example
     mkdir build
