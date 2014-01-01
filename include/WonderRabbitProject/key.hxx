@@ -45,7 +45,7 @@ namespace WonderRabbitProject
       }
       
       const bool is_valid(const int code) const
-      { return (code > 0) && (code_to_name_table.count(code) > 0); }
+      { return (code >= 0) && (code_to_name_table.count(code) > 0); }
       
       iterator_t begin() { return name_to_code_table.begin(); }
       iterator_t end() { return name_to_code_table.end(); }
