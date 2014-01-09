@@ -40,6 +40,13 @@ You should be set appropriately for your environment.
     ninja
     ./key
 
+### Note for Windows
+
+you must need copy or symlink two .dll files from your development environment lib directory, maybe:
+
+1. libgcc_s_sjlj-1.dll
+2. libstdc++-6.dll
+
 ## Requirement
 
 * C++11
