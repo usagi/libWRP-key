@@ -7,7 +7,6 @@ C++ cross platform key-code library
 - (Supported)
     - GNU/Linux
     - Mac/OSX
-- (Comming soon)
     - Microsoft/Windows
 
 ## Library
@@ -16,6 +15,8 @@ The library is in the "./include" directory.
 
 ### Install
 
+#### for GNU/Linux or OSX
+
 to system: install to /usr/local
 
     sudo ./install.sh
@@ -23,6 +24,10 @@ to system: install to /usr/local
 to the other:
 
     PREFIX=~/opt ./install.sh
+
+#### Windows
+
+You should be set appropriately for your environment.
 
 ## Example
 
@@ -38,6 +43,8 @@ to the other:
 ## Requirement
 
 * C++11
+    * g++ >= 4.6 (Recommend >= 4.7)
+    * clang++ >= 3.3
 
 ## License
 
@@ -46,4 +53,3 @@ to the other:
 ## Author
 
 (C)2014 Usagi Ito<usagi@WonderRabbitProject.net> / [Wonder Rabbit Project](http://www.WonderRabbitProject.net/).
-

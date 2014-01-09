@@ -18,13 +18,24 @@ namespace WonderRabbitProject
 {
   namespace key
   {
-    struct key_helper_t final
+    struct key_helper_t
+#if __GNUC__ == 4 &&  __GNUC_MINOR__ < 7
+    
+#else
+    final
+#endif
     {
+#if __GNUC__ == 4 &&  __GNUC_MINOR__ < 7
+      typedef std::unordered_map<std::string, const int> name_to_code_table_t;
+      typedef std::unordered_multimap<int, const std::string> code_to_name_table_t;
+      typedef name_to_code_table_t::iterator iterator_t;
+      typedef name_to_code_table_t::const_iterator const_iterator_t;
+#else
       using name_to_code_table_t = std::unordered_map<std::string, const int>;
       using code_to_name_table_t = std::unordered_multimap<int, const std::string>;
       using iterator_t = name_to_code_table_t::iterator;
       using const_iterator_t = name_to_code_table_t::const_iterator;
-      
+#endif
       static const key_helper_t& instance()
       { static key_helper_t i; return i; }
       
@@ -57,12 +68,20 @@ namespace WonderRabbitProject
       
       std::vector<std::pair<int, std::string>> data_sorted_by_code() const
       {
+#if __GNUC__ == 4 &&  __GNUC_MINOR__ < 7
+        typedef std::pair<int, std::string> return_element_t;
+        typedef std::vector<return_element_t> return_t;
+#else
         using return_element_t = std::pair<int, std::string>;
         using return_t = std::vector<return_element_t>;
+#endif
         
         auto by_name = data_sorted_by_name();
+#if __GNUC__ == 4 &&  __GNUC_MINOR__ < 7
+        typedef std::map<std::string, const int>::value_type by_name_element_t;
+#else
         using by_name_element_t = decltype(by_name)::value_type;
-        
+#endif
         return_t vector;
         
         std::transform(std::begin(by_name), std::end(by_name), std::back_inserter(vector),
@@ -85,8 +104,13 @@ namespace WonderRabbitProject
         
         for(const auto& t : keys)
         {
+#if __GNUC__ == 4 &&  __GNUC_MINOR__ < 7
+          name_to_code_table.insert(name_to_code_table_t::value_type(std::get<0>(t), std::get<1>(t)));
+          code_to_name_table.insert(code_to_name_table_t::value_type(std::get<1>(t), std::get<0>(t)));
+#else
           name_to_code_table.emplace(std::get<0>(t), std::get<1>(t));
           code_to_name_table.emplace(std::get<1>(t), std::get<0>(t));
+#endif
         }
       }
       name_to_code_table_t name_to_code_table;
