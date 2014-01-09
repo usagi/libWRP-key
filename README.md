@@ -1,4 +1,4 @@
-# libWRP-SQLite3
+# libWRP-key
 
 C++ cross platform key-code library
 
