@@ -5,7 +5,7 @@
 
 int main()
 {
-  auto writer = WonderRabbitProject::key::writer_t::instance();
+  const auto& writer = WonderRabbitProject::key::writer_t::instance();
   
   for(auto n = 3; n; --n)
   {

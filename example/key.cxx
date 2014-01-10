@@ -14,9 +14,9 @@ namespace
         "\n"
       ;
     
-    auto kh = key_helper_t::instance();
+    const auto& kh = key_helper_t::instance();
     
-    auto data = kh.data_sorted_by_code();
+    const auto data = kh.data_sorted_by_code();
     for(const auto& p : data)
       std::cout
       << "  " << p.first << "(" << p.second << ")"
@@ -33,8 +33,8 @@ namespace
          "\n"
       ;
     
-    auto kh = key_helper_t::instance();
-    auto code = kh.code(key_name);
+    const auto& kh = key_helper_t::instance();
+    const auto code = kh.code(key_name);
     
     std::cout << "  name :" << code << " --> " << kh.name(code) << std::endl;
     

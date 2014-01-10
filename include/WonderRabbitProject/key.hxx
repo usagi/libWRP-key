@@ -98,6 +98,11 @@ namespace WonderRabbitProject
       }
       
     private:
+      key_helper_t(const key_helper_t&) = delete;
+      key_helper_t(key_helper_t&&) = delete;
+      void operator=(const key_helper_t&) = delete;
+      void operator=(key_helper_t&&) = delete;
+      
       key_helper_t()
       {
         #include "key/detail.keys.hxx"
