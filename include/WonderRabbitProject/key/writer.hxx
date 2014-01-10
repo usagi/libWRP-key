@@ -130,7 +130,6 @@ namespace WonderRabbitProject
       fd = open("/dev/uinput", O_WRONLY | O_NONBLOCK);
       if(fd < 0)
       { throw std::runtime_error("/dev/uinput open error"); }
-      std::cerr << "\n =*= " << fd << " =*=\n";
     }
     
     void initialize_create_device()
@@ -174,10 +173,8 @@ namespace WonderRabbitProject
     
     void finalize_uinput_device()
     {
-      std::cerr << "\n =/= " << fd << " =/=\n";
       if (ioctl(fd, UI_DEV_DESTROY) < 0)
-      { std::cerr << "\n*************** " << errno << " ****************** " << EBADF << " " << EFAULT << " " << EINVAL << " " << ENOTTY << " " << ENOTTY << "\n";
-        throw std::runtime_error("finalize error"); }
+      { throw std::runtime_error("finalize error"); }
     }
     
     void send_event(const int type, const int code, const int value) const
