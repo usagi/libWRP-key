@@ -20,9 +20,9 @@ namespace WonderRabbitProject
   {
     struct key_helper_t
 #if __GNUC__ == 4 &&  __GNUC_MINOR__ < 7
-    
+      
 #else
-    final
+      final
 #endif
     {
 #if __GNUC__ == 4 &&  __GNUC_MINOR__ < 7
@@ -119,3 +119,6 @@ namespace WonderRabbitProject
   }
 }
 
+#ifndef WRP_NO_KEY_WRITER
+  #include "key/writer.hxx"
+#endif

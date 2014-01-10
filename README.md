@@ -1,6 +1,7 @@
 # libWRP-key
 
 C++ cross platform key-code library
+ with corss platform virtual keyboard write(send) key library.
 
 ## Support
 
@@ -39,6 +40,16 @@ You should be set appropriately for your environment.
     cmake -G Ninja ..
     ninja
     ./key
+
+[example/writer.cxx](example/writer.cxx)
+
+GNU/Linux: * need root *
+
+    sudo ./writer
+
+OSX or Windows:
+
+    ./writer
 
 ### Note for Windows
 
