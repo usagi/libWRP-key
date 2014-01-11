@@ -75,7 +75,7 @@ namespace WonderRabbitProject
           CGEventPost(event_tap_location, key_release_event);
           CFRelease(key_release_event);
         }
-        CFRelease(key_press_event);
+        CFRelease(key_event);
 #elif defined(__linux)
         send_event(EV_KEY, code, (state != state_t::up));
         if(state == state_t::press)
