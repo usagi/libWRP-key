@@ -140,6 +140,12 @@ namespace WonderRabbitProject
           }
         }
         {
+#if __GNUC__ == 4 &&  __GNUC_MINOR__ < 7
+          typedef std::tuple<const char* const, const int> keys_element_t;
+#else
+          using keys_element_t = std::tuple<const char* const, const int>;
+#endif
+          
           #include "key/detail.keys.USB_HID_Usage_ID.hxx"
           
           for(const auto& t : keys)
