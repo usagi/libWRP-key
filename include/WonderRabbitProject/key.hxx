@@ -59,7 +59,7 @@ namespace WonderRabbitProject
         return std::move(vector);
       }
       
-      const int usb_hid_usage_id_from_name(const std::string& name) { return name_to_usb_hid_usage_id.at(name); }
+      const int usb_hid_usage_id_from_name(const std::string& name) { return name_to_usb_hid_usage_id_table.at(name); }
       
       const std::string name_from_usb_hid_usage_id(code) const { return usb_hid_usage_id_to_name_table.equal_range(code).first->second; }
       
