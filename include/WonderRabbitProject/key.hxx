@@ -26,13 +26,17 @@ namespace WonderRabbitProject
 #endif
     {
 #if __GNUC__ == 4 &&  __GNUC_MINOR__ < 7
-      typedef std::unordered_map<std::string, const int> name_to_code_table_t;
+      typedef std::unordered_map<std::string, const int>      name_to_code_table_t;
       typedef std::unordered_multimap<int, const std::string> code_to_name_table_t;
+      typedef std::unordered_map<std::string, const int>      name_to_usb_hid_usage_id_table_t;
+      typedef std::unordered_multimap<int, const std::string>      usb_hid_usage_id_to_name_table_t;
       typedef name_to_code_table_t::iterator iterator_t;
       typedef name_to_code_table_t::const_iterator const_iterator_t;
 #else
       using name_to_code_table_t = std::unordered_map<std::string, const int>;
       using code_to_name_table_t = std::unordered_multimap<int, const std::string>;
+      using name_to_usb_hid_usage_id_table_t = std::unordered_map<std::string, const int>;
+      using usb_hid_usage_id_to_name_table_t = std::unordered_multimap<int, const std::string>;
       using iterator_t = name_to_code_table_t::iterator;
       using const_iterator_t = name_to_code_table_t::const_iterator;
 #endif
@@ -46,6 +50,22 @@ namespace WonderRabbitProject
       std::vector<std::string> names(const int code) const
       {
         const auto range = code_to_name_table.equal_range(code);
+        std::vector<std::string> vector;
+        std::transform
+        ( range.first, range.second, std::back_inserter(vector)
+        , [](decltype(*range.first)& p){ return p.second; }
+        );
+        std::sort(std::begin(vector), std::end(vector));
+        return std::move(vector);
+      }
+      
+      const int usb_hid_usage_id_from_name(const std::string& name) { return name_to_usb_hid_usage_id.at(name); }
+      
+      const std::string name_from_usb_hid_usage_id(code) const { return usb_hid_usage_id_to_name_table.equal_range(code).first->second; }
+      
+      std::vector<std::string> names_from_usb_hid_usage_id(const int code) const
+      {
+        const auto range = usb_hid_usage_id_to_name_table.equal_range(code);
         std::vector<std::string> vector;
         std::transform
         ( range.first, range.second, std::back_inserter(vector)
@@ -105,21 +125,39 @@ namespace WonderRabbitProject
       
       key_helper_t()
       {
-        #include "key/detail.keys.hxx"
-        
-        for(const auto& t : keys)
         {
+          #include "key/detail.keys.hxx"
+          
+          for(const auto& t : keys)
+          {
 #if __GNUC__ == 4 &&  __GNUC_MINOR__ < 7
-          name_to_code_table.insert(name_to_code_table_t::value_type(std::get<0>(t), std::get<1>(t)));
-          code_to_name_table.insert(code_to_name_table_t::value_type(std::get<1>(t), std::get<0>(t)));
+            name_to_code_table.insert(name_to_code_table_t::value_type(std::get<0>(t), std::get<1>(t)));
+            code_to_name_table.insert(code_to_name_table_t::value_type(std::get<1>(t), std::get<0>(t)));
 #else
-          name_to_code_table.emplace(std::get<0>(t), std::get<1>(t));
-          code_to_name_table.emplace(std::get<1>(t), std::get<0>(t));
+            name_to_code_table.emplace(std::get<0>(t), std::get<1>(t));
+            code_to_name_table.emplace(std::get<1>(t), std::get<0>(t));
 #endif
+          }
+        }
+        {
+          #include "key/detail.keys.USB_HID_Usage_ID.hxx"
+          
+          for(const auto& t : keys)
+          {
+#if __GNUC__ == 4 &&  __GNUC_MINOR__ < 7
+            name_to_usb_hid_usage_id_table.insert(name_to_code_table_t::value_type(std::get<0>(t), std::get<1>(t)));
+            usb_hid_usage_id_to_name_table.insert(code_to_name_table_t::value_type(std::get<1>(t), std::get<0>(t)));
+#else
+            name_to_usb_hid_usage_id_table.emplace(std::get<0>(t), std::get<1>(t));
+            usb_hid_usage_id_to_name_table.emplace(std::get<1>(t), std::get<0>(t));
+#endif
+          }
         }
       }
       name_to_code_table_t name_to_code_table;
       code_to_name_table_t code_to_name_table;
+      name_to_usb_hid_usage_id_table_t name_to_usb_hid_usage_id_table;
+      usb_hid_usage_id_to_name_table_t usb_hid_usage_id_to_name_table;
     };
   }
 }
