@@ -197,7 +197,6 @@ keys_element_t keys[] =
 , std::make_tuple("num octal", -54)
 , std::make_tuple("num decimal", -55)
 , std::make_tuple("num hexadecimal", -56)
-, std::make_tuple("mute", KEY_MUTE)
 , std::make_tuple("mute", VK_VOLUME_MUTE)
 , std::make_tuple("volume down", VK_VOLUME_DOWN)
 , std::make_tuple("volume up", VK_VOLUME_UP)
