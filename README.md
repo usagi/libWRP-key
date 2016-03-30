@@ -64,9 +64,9 @@ you must need copy or symlink two .dll files from your development environment l
     * g++ >= 4.6 (Recommend >= 4.7)
     * clang++ >= 3.3
 
-## License
+## Licence
 
-* [GNU GENERAL PUBLIC LICENSE Version 3](http://www.gnu.org/licenses/gpl.html)
+* [libWRP-key is licensed under The Happy Bunny License and MIT License](LICENCE.md)
 
 ## Author
 
