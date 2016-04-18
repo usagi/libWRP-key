@@ -38,10 +38,10 @@ namespace WonderRabbitProject
       , press = down_and_up
       };
       
-      void operator()(const std::string& name, const state_t state = state_t::press) const
+      void operator()( const std::string& name, const state_t = state_t::press ) const
       { operator()(key_helper_t::instance().code(name)); }
       
-      void operator()(const int code, const state_t state = state_t::press) const
+      void operator()( const int code, const state_t state = state_t::press ) const
       {
         if(!key_helper_t::instance().is_valid(code))
           throw std::runtime_error("invalid key code");

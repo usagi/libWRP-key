@@ -43,9 +43,9 @@ namespace WonderRabbitProject
       static const key_helper_t& instance()
       { static key_helper_t i; return i; }
       
-      const int code(const std::string& name) const { return name_to_code_table.at(name); }
+      int code(const std::string& name) const { return name_to_code_table.at(name); }
       
-      const std::string name(const int code) const { return code_to_name_table.equal_range(code).first->second; }
+      std::string name(const int code) const { return code_to_name_table.equal_range(code).first->second; }
       
       std::vector<std::string> names(const int code) const
       {
@@ -59,9 +59,9 @@ namespace WonderRabbitProject
         return std::move(vector);
       }
       
-      const int usb_hid_usage_id_from_name(const std::string& name) { return name_to_usb_hid_usage_id_table.at(name); }
+      int usb_hid_usage_id_from_name(const std::string& name) { return name_to_usb_hid_usage_id_table.at(name); }
       
-      const std::string name_from_usb_hid_usage_id(const int code) const { return usb_hid_usage_id_to_name_table.equal_range(code).first->second; }
+      std::string name_from_usb_hid_usage_id(const int code) const { return usb_hid_usage_id_to_name_table.equal_range(code).first->second; }
       
       std::vector<std::string> names_from_usb_hid_usage_id(const int code) const
       {
@@ -75,7 +75,7 @@ namespace WonderRabbitProject
         return std::move(vector);
       }
       
-      const bool is_valid(const int code) const
+      bool is_valid(const int code) const
       { return (code >= 0) && (code_to_name_table.count(code) > 0); }
       
       iterator_t begin() { return name_to_code_table.begin(); }
